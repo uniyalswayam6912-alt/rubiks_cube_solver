@@ -6,6 +6,7 @@
 # 36-44: Left(L)(Orange"O")
 # 45-53: Back(B)(Blue"B")
 
+from collections import deque
 SOLVED_STATE= ("W"*9 + "R"*9 + "G"*9 + "Y"*9 + "O"*9 + "B"*9)
 
 # SOLVED_STATE Sample: "WWWWWWWWWRRRRRRRRRGGGGGGGGGYYYYYYYYYOOOOOOOOOBBBBBBBBB"
@@ -341,8 +342,7 @@ def move_B_prime(state: str) -> str:
     new_s[L[0]], new_s[L[1]], new_s[L[2]] = s[D[0]], s[D[1]], s[D[2]]
 
     return "".join(new_s)
-
-
+ 
 
 MOVES = {
     "U": move_U,
@@ -362,6 +362,58 @@ MOVES = {
 def apply_move(state: str, move: str) -> str:
     return MOVES[move](state)
 
+def is_bad_move(prev, curr):
+    # if same move is done again
+    if prev == curr:
+        return True
+
+    # inverse move
+    if prev + "'" == curr or curr + "'" == prev:
+        return True
+
+    return False
+
+def reconstruct_path(parent, move_used, end_state):
+    path = []
+    curr = end_state
+
+    while parent[curr] is not None:
+        path.append(move_used[curr])
+        curr = parent[curr]
+
+    path.reverse()
+    return path
+
+from collections import deque
+
+def bfs(start_state: str):
+    queue = deque([(start_state, None)])  # (state, last_move)
+    visited = set([start_state])
+
+    parent = {start_state: None}
+    move_used = {start_state: None}
+
+    while queue:
+        curr, last_move = queue.popleft()
+
+        if is_solved(curr):
+            return reconstruct_path(parent, move_used, curr)
+
+        for move in MOVES:
+            if last_move and is_bad_move(last_move, move):
+                continue
+
+            next_state = apply_move(curr, move)
+
+            if next_state not in visited:
+                visited.add(next_state)
+                queue.append((next_state, move))
+
+                parent[next_state] = curr
+                move_used[next_state] = move
+
+    return None
+
 if __name__ == "__main__":
     for m in ["U","R","F","L","D","B"]:
         cube = SOLVED_STATE
@@ -369,7 +421,18 @@ if __name__ == "__main__":
         cube = apply_move(cube, m+"'")
         assert cube == SOLVED_STATE
 
+    # scrambling the cube
+    scramble = ["U", "R", "F"]
 
-    print_cube(cube) #print solved cube
-    print("Solved:", is_solved(cube)) #checks if the cube is solved 
+    cube = SOLVED_STATE
+
+    scramble = ["U","R","F","B"]
+    for m in scramble:
+        cube = apply_move(cube, m)
+
+    solution = ["B'","F'","R'","U'"]
+    for m in solution:
+        cube = apply_move(cube, m)
+
+    print("Solved?", cube == SOLVED_STATE)
 

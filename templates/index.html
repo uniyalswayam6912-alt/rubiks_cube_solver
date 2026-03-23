@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rubik's Cube Solver</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>🧊 Rubik's Cube Solver</h1>
+
+    <div class="input-section">
+        <input type="text" id="scramble" placeholder="Enter scramble (e.g. U R F R')">
+
+        <div class="buttons">
+            <button onclick="solveCube()">Solve</button>
+            <button onclick="generateScramble()">Random</button>
+            <button onclick="resetAll()">Reset</button>
+        </div>
+    </div>
+
+    <div id="cube3d"></div>
+
+    <div class="output">
+        <p id="status">Status: Waiting...</p>
+        <p id="solution"></p>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
