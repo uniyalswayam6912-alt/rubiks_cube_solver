@@ -32,4 +32,55 @@ Each face contains 9 stickers arranged in row-major order.
 - Implement BFS-based solver (depth-limited)
 - Build Flask-based web interface
 
+# 🧊 Rubik's Cube Solver
+
+## Overview
+
+This project implements a Rubik’s Cube Solver using Python and BFS (Breadth-First Search).
+It includes a full-stack setup with a Flask backend and an interactive 3D frontend.
+
+---
+
+## Tech Stack
+
+* Python (Core logic, BFS)
+* Flask (Backend API)
+* HTML, CSS, JavaScript (Frontend)
+* Three.js (3D Cube Visualization)
+
+---
+
+## Features
+
+* Cube represented using a 54-character string model
+* Move functions for all faces (U, D, L, R, F, B)
+* BFS-based solver for short-depth scrambles
+* Web interface for user input
+* 3D cube visualization
+
+---
+
+##  Limitations
+
+* Solver works for shallow scrambles (due to BFS)
+* Cube visualization is not yet fully synced with solver state
+
+---
+
+## Usage
+
+1. Enter scramble (e.g. `U R F`)
+2. Click **Solve**
+3. View solution sequence
+
+---
+
+## Future Improvements
+
+* Implement IDA* for deeper solving
+* Animate cube moves visually
+* Sync cube state with solver
+
+---
+
 
