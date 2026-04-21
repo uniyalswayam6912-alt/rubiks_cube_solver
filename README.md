@@ -1,86 +1,51 @@
-# Rubik's Cube Solver (Work in Progress)
-
-This project represents a 3x3 Rubik's Cube using a 54-character string model.
-The goal is to build a solver capable of solving the cube within a limited number of moves using search algorithms.
-
-
-## Cube Representation
-
-The cube is represented as a 54-character string.
-
-Face index mapping:
-
-0–8   : U (White)
-9–17  : R (Red)
-18–26 : F (Green)
-27–35 : D (Yellow)
-36–44 : L (Orange)
-45–53 : B (Blue)
-
-Each face contains 9 stickers arranged in row-major order.
-
-## Current Features
-
-- Solved state representation
-- Solved-state checker
-- Cube face printer
-
-## Roadmap
-
-- Implement individual face moves (U, D, L, R, F, B)
-- Add move application logic
-- Implement BFS-based solver (depth-limited)
-- Build Flask-based web interface
-
-# 🧊 Rubik's Cube Solver
+# Rubik's Cube Solver
 
 ## Overview
+A high-performance 3x3 Rubik’s Cube solver using advanced search algorithms and heuristic pruning.
 
-This project implements a Rubik’s Cube Solver using Python and BFS (Breadth-First Search).
-It includes a full-stack setup with a Flask backend and an interactive 3D frontend.
+This project includes:
+- Backend solver (Python)
+- API layer for solving
+- Interactive frontend visualization
 
 ---
 
-## Tech Stack
+## Algorithm
 
-* Python (Core logic, BFS)
-* Flask (Backend API)
-* HTML, CSS, JavaScript (Frontend)
-* Three.js (3D Cube Visualization)
+The solver is based on:
+
+- **IDA\*** (Iterative Deepening A*)
+- Heuristic pruning using precomputed tables
+- Optimized cube state representation
+
+### Key Concepts
+- Phase-based solving
+- Heuristic evaluation (corner + edge databases)
+- State-space reduction
 
 ---
 
 ## Features
 
-* Cube represented using a 54-character string model
-* Move functions for all faces (U, D, L, R, F, B)
-* BFS-based solver for short-depth scrambles
-* Web interface for user input
-* 3D cube visualization
+- Solve any valid 3x3 cube state
+- Fast solution generation using heuristics
+- Frontend visualization of moves
+- API integration for real-time solving
 
 ---
 
-##  Limitations
+## Project Structure
 
-* Solver works for shallow scrambles (due to BFS)
-* Cube visualization is not yet fully synced with solver state
+## Example
 
----
+Scramble (≤ 6 moves):
+R U R' U' F2
 
-## Usage
+Input representation:
+[generated internally from scramble]
 
-1. Enter scramble (e.g. `U R F`)
-2. Click **Solve**
-3. View solution sequence
+Output (solution):
+F2 U R U' R'
 
----
-
-## Future Improvements
-
-* Implement IDA* for deeper solving
-* Animate cube moves visually
-* Sync cube state with solver
-
----
-
-
+Number of moves: 5  
+Time taken: ~0.01s
