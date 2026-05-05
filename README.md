@@ -1,5 +1,10 @@
 # Rubik's Cube Solver
 
+## 📸 Screenshots
+
+### Rubik's
+![Interface](rubiks.png)
+
 ## Overview
 A high-performance 3x3 Rubik’s Cube solver using advanced search algorithms and heuristic pruning.
 
